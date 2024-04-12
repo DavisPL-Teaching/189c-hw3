@@ -20,6 +20,14 @@ and enforces this constraint.
 We also provide two helper functions:
 - `regex_all()` returns a Z3 regex that matches any string.
 - `regex_containing(r)` returns a Z3 regex that matches any string containing a match for regex `r` somewhere in the middle.
+
+Stuck?
+
+If you get stuck, take a look at `regex_help.md`
+for what RegEx operations are available in Z3.
+And take a look at `hints.md` for some hints
+on some of the harder rules.
+You can always ask on Piazza for help!
 """
 
 import z3
