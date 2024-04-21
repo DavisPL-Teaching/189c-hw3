@@ -23,13 +23,34 @@ We also provide two helper functions:
 - `regex_all()` returns a Z3 regex that matches any string.
 - `regex_containing(r)` returns a Z3 regex that matches any string containing a match for regex `r` somewhere in the middle.
 
-Stuck?
+=== Additional requirements ===
 
-If you get stuck, take a look at `regex_help.md`
-for what RegEx operations are available in Z3.
-And take a look at `hints.md` for some hints
-on some of the harder rules.
-You can always ask on Piazza for help!
+This homework is about trying to encode practical constraints
+into precise Z3 formulas.
+With the exception of rules 5 and 9,
+all of your rules should exactly encode the requirements
+given by the password game (and no additional restrictions).
+For example, if the password is at least 5 characters long,
+you shouldn't say that it is exactly 10 characters long,
+and you shouldn't hard-code a specific string like "password"
+to satisfy the rule.
+We may vet your implemention against a correct implementation
+of the rule during grading to see if it matches the right set of
+strings.
+
+For rules 5 and 9, you won't be able to encode the exact
+requirements, but you should come up with a useful stronger
+approximation. For example, if the rule is "contains a number",
+you could encode that as "contains between 1 and 3 numbers."
+But you still shouldn't hard code a specific string like "123"
+to satisfy the rule.
+
+=== Getting help ===
+
+If you get stuck, take a look at:
+- regex_help.md
+- hints.md
+- [Z3 python documentation](https://z3prover.github.io/api/html/namespacez3py.html)
 """
 
 import z3
@@ -57,12 +78,13 @@ def rule_0():
 #########################
 ###   Password Rules  ###
 #########################
-# Implement the rules for rounds 1 through 10 of the game.
-# You will need to play the game to figure out what the rules are!
-# https://neal.fun/password-game/
+"""
+Implement the rules for rounds 1 through 10 of the game.
+You will need to play the game to figure out what the rules are!
 
-# Similarly to rule 0, your rules will refer
-# to the password variable `p` and return a Z3 constraint.
+Similarly to rule 0, your rules will refer
+to the password variable `p` and return a Z3 constraint.
+"""
 
 def rule_1():
     # TODO
@@ -107,9 +129,11 @@ def rule_10():
 ########################
 ###    Entrypoint    ###
 ########################
-# Combine all the rules and solve the game.
-# Uncomment each rule as you implement it.
-# To run, run `python password.py` in the terminal.
+"""
+Combine all the rules and solve the game.
+To run, run `python password.py` in the terminal.
+Uncomment each rule as you implement it.
+"""
 
 solver = z3.Solver()
 solver.add(rule_0())
@@ -143,3 +167,24 @@ print_result(solver)
 
 # This may be useful for debugging:
 # print(solver.assertions())
+
+########################
+###    Discussion    ###
+########################
+"""
+Complete the last few questions after you have finished rules 1-10.
+
+11. Are there any of your rules that are redundant?
+If so, use Z3 to prove it: show that the redundant rule is implied
+by one of the others.
+"""
+
+"""
+12. Which of the rules was hardest to encode?
+Why do you think it was difficult?
+(Give your best guess -- there is no specific right answer.)
+
+13. Which of the rules was hardest for Z3 to solve?
+Why do you think it was difficult?
+(Give your best guess -- there is no specific right answer.)
+"""
