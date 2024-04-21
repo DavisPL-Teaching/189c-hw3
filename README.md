@@ -1,10 +1,10 @@
 # Homework 3: The Password Game
 
+## ➜ [The password game](https://neal.fun/password-game/)
+
 ## Due date: TBD
 
 ## Overview
-
-[The password game](https://neal.fun/password-game/)
 
 In this homework, we will use Z3 -- in particular,
 the Z3 API support for regular expressions --
@@ -26,10 +26,22 @@ Your task is to fill in `password.py` with a Z3 program that solves the first 10
 a password satisfying all the cosntraints for each of the first 10 levels.
 The file contains further instructions.
 
-## RegEx Help
+## Getting help
 
-A successful solution will rely on the Z3 API support for regular expressions. We have include a file `regex_help.md` that provides some help with some of the available regular expression operators in Z3 that you may need to use.
+### Regex help
 
-## Hints
+A successful solution will rely on the Z3 API support for regular expressions (Regex). We have include a file `regex_help.md` that provides some help with some of the available regular expression operators in Z3 that you may need to use.
+
+### ASCII table
+
+You will also need to reference the ASCII table to understand
+how certain chracters in a string are encoded.
+You can find an ASCII table online or in `ascii_table.txt`.
+
+### Hints
 
 If you get stuck, take a look at the `hints.md` file for some hints on how to proceed.
+
+### Piazza
+
+As always, please ask questions on Piazza or drop by office hours!
