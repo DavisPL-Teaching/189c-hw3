@@ -1,18 +1,24 @@
 # Homework 3: The Password Game
 
-## Due date: Friday, May 10
+## Due date: TBD
 
 ## Overview
 
+[The password game](https://neal.fun/password-game/)
+
 In this homework, we will use Z3 -- in particular,
 the Z3 API support for regular expressions --
-to implement a solver for the first 10 levels of
-[the password game](https://neal.fun/password-game/).
+to implement a solver for the first 10 levels of the password game
+(link above).
 
-Before you start, it is recommended that you try the password game yourself, to get a sense of how it works.
+Before you start, try the password game yourself,
+to get a sense of how it works.
 
-As with HW1 and HW2, you will submit your homework through GitHub Classroom. Clone your copy of the repository, then push your changes to GitHub before the deadline.
-You will need to have Z3 installed; see [Homework 0](https://github.com/DavisPL-Teaching/189c-hw0).
+As with HW2, you will need to have Z3 installed; see [Homework 0](https://github.com/DavisPL-Teaching/189c-hw0).
+
+As with HW1 and HW2, you will submit your homework through GitHub Classroom.
+Clone your copy of the repository, then push your changes to GitHub before the deadline.
+Please see [this Piazza post](https://piazza.com/class/lt90i40zrot3ue/post/48) for further instructions.
 
 ## Task
 

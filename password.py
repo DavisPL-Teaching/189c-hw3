@@ -1,6 +1,8 @@
 """
 The password game
 
+https://neal.fun/password-game/
+
 You will implement a series of rules that the
 password should satisfy. Each rule is a function
     rule_<number>(s)
