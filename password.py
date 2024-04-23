@@ -45,6 +45,22 @@ you could encode that as "contains between 1 and 3 numbers."
 But you still shouldn't hard code a specific string like "123"
 to satisfy the rule.
 
+=== Grading notes ===
+
+To ensure you get credit, please check that
+- python3 password.py runs without errors
+- pytest password_test.py runs without errors (for problem 11)
+- You do not rename or change the signature of the variable
+    p
+  or of any of the functions
+    rule_0, rule_1, ..., rule_10.
+  During grading, these will be checked against a correct implementation
+  to see if they match the right set of strings.
+  (You don't have to have the exact same implementation as us, but it should be
+  equivalent, aside from rules 5 and 9. See the additional requirements above).
+- Your answers to problems 12-13 are filled in only in the designated space,
+  and the lines "Answer in the Space Below" are not removed.
+
 === Getting help ===
 
 If you get stuck, take a look at:
@@ -132,28 +148,34 @@ def rule_10():
 """
 Combine all the rules and solve the game.
 To run, run `python password.py` in the terminal.
-Uncomment each rule as you implement it.
+
+This runs the main() function below.
+If you have any unimplemented rules, it
+will skip after the first rule that is not implemented.
 """
 
-solver = z3.Solver()
-solver.add(rule_0())
+def main():
+    solver = z3.Solver()
 
-# Uncomment each rule as you implement it
-# solver.add(rule_1())
-# solver.add(rule_2(p))
-# solver.add(rule_3(p))
-# solver.add(rule_4(p))
-# solver.add(rule_5(p))
-# solver.add(rule_6(p))
-# solver.add(rule_7(p))
-# solver.add(rule_8(p))
-# solver.add(rule_9(p))
-# solver.add(rule_10(p))
+    try:
+        solver.add(rule_0())
+        solver.add(rule_1())
+        solver.add(rule_2())
+        solver.add(rule_3())
+        solver.add(rule_4())
+        solver.add(rule_5())
+        solver.add(rule_6())
+        solver.add(rule_7())
+        solver.add(rule_8())
+        solver.add(rule_9())
+        solver.add(rule_10())
 
-# Function to print the result of the solver
-def print_result(solver):
+    except NotImplementedError:
+        print("(Some rules were not implemented)")
+
     result = solver.check()
     if result == z3.sat:
+        print("Solution found")
         print(solver.model())
     elif result == z3.unsat:
         print("No solution found")
@@ -162,11 +184,11 @@ def print_result(solver):
     else:
         assert False, "Unreachable"
 
-# Get the solution
-print_result(solver)
+    # Uncomment for debugging:
+    # print(solver.assertions())
 
-# This may be useful for debugging:
-# print(solver.assertions())
+if __name__ == "__main__":
+    main()
 
 ########################
 ###    Discussion    ###
@@ -175,16 +197,32 @@ print_result(solver)
 Complete the last few questions after you have finished rules 1-10.
 
 11. Are there any of your rules that are redundant?
-If so, use Z3 to prove it: show that the redundant rule is implied
-by one of the others.
+If so, use Z3 to prove it: show that each redundant rule
+is implied by one of the others.
+Fill in the test below; it should have an assertion on the output
+of Z3 for each redundant rule.
 """
+
+def test_redundant_rules():
+    # TODO
+    raise NotImplementedError
 
 """
 12. Which of the rules was hardest to encode?
 Why do you think it was difficult?
 (Give your best guess -- there is no specific right answer.)
 
+# Do not remove this line:
+###### Answer in the Space Below ######
+
+#######################################
+
 13. Which of the rules was hardest for Z3 to solve?
 Why do you think it was difficult?
 (Give your best guess -- there is no specific right answer.)
+
+# Do not remove this line:
+###### Answer in the Space Below ######
+
+#######################################
 """
