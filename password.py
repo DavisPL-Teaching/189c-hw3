@@ -49,7 +49,6 @@ to satisfy the rule.
 
 To ensure you get credit, please check that
 - python3 password.py runs without errors
-- pytest password_test.py runs without errors (for problem 11)
 - You do not rename or change the signature of the variable
     p
   or of any of the functions
@@ -58,8 +57,9 @@ To ensure you get credit, please check that
   to see if they match the right set of strings.
   (You don't have to have the exact same implementation as us, but it should be
   equivalent, aside from rules 5 and 9. See the additional requirements above).
+- pytest password_test.py runs with a single non-skipped test (for problem 11)
 - Your answers to problems 12-13 are filled in only in the designated space,
-  and the lines "Answer in the Space Below" are not removed.
+  and the lines "Answer in the Space Below" and "End of Answer" are not modified.
 
 === Getting help ===
 
@@ -157,25 +157,17 @@ will skip after the first rule that is not implemented.
 def main():
     solver = z3.Solver()
 
+    rules = [rule_0, rule_1, rule_2, rule_3, rule_4, rule_5, rule_6, rule_7, rule_8, rule_9, rule_10]
     try:
-        solver.add(rule_0())
-        solver.add(rule_1())
-        solver.add(rule_2())
-        solver.add(rule_3())
-        solver.add(rule_4())
-        solver.add(rule_5())
-        solver.add(rule_6())
-        solver.add(rule_7())
-        solver.add(rule_8())
-        solver.add(rule_9())
-        solver.add(rule_10())
+        for i in range(11):
+            solver.add(rules[i]())
 
     except NotImplementedError:
-        print("(Some rules were not implemented)")
+        print(f"Note: rule {i} was not implemented, additional rules skipped")
 
+    print("")
     result = solver.check()
     if result == z3.sat:
-        print("Solution found")
         print(solver.model())
     elif result == z3.unsat:
         print("No solution found")
@@ -199,10 +191,15 @@ Complete the last few questions after you have finished rules 1-10.
 11. Are there any of your rules that are redundant?
 If so, use Z3 to prove it: show that each redundant rule
 is implied by one of the others.
-Fill in the test below; it should have an assertion on the output
-of Z3 for each redundant rule.
+
+Fill in the test below; it should have one assertion
+for each redundant rule.
+Remember to unskip the test to get credit!
 """
 
+import pytest
+
+@pytest.mark.skip
 def test_redundant_rules():
     # TODO
     raise NotImplementedError
@@ -215,7 +212,7 @@ Why do you think it was difficult?
 # Do not remove this line:
 ###### Answer in the Space Below ######
 
-#######################################
+###### End of Answer ######
 
 13. Which of the rules was hardest for Z3 to solve?
 Why do you think it was difficult?
@@ -224,5 +221,5 @@ Why do you think it was difficult?
 # Do not remove this line:
 ###### Answer in the Space Below ######
 
-#######################################
+###### End of Answer ######
 """
