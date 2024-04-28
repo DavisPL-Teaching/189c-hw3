@@ -5,38 +5,25 @@ https://neal.fun/password-game/
 
 You will implement a series of rules that the
 password should satisfy. Each rule is a function
-    rule_<number>(s)
-that takes a Z3 string variable `s` and returns
+
+    rule_<number>(password)
+
+that takes a Z3 string variable `password` and returns
 a Z3 constraint that the password should satisfy.
 
 To run the code, open a terminal and execute
+
     python3 password.py
 
 At the bottom of the file, all of these rules
 are combined for you and passed into the solver.
+(You don't have to modify this part.)
+
+=== Additional requirements ===
 
 To simplify the problem, we will assume that the
 password is ASCII-only. The rule `rule_0` is written for you,
 and enforces this constraint.
-
-We also provide two helper functions:
-- `regex_all()` returns a Z3 regex that matches any string.
-- `regex_containing(r)` returns a Z3 regex that matches any string containing a match for regex `r` somewhere in the middle.
-
-=== Additional requirements ===
-
-This homework is about trying to encode practical constraints
-into precise Z3 formulas.
-With the exception of rules 5 and 9,
-all of your rules should exactly encode the requirements
-given by the password game (and no additional restrictions).
-For example, if the password is at least 5 characters long,
-you shouldn't say that it is exactly 10 characters long,
-and you shouldn't hard-code a specific string like "password"
-to satisfy the rule.
-We may vet your implemention against a correct implementation
-of the rule during grading to see if it matches the right set of
-strings.
 
 For rules 5 and 9, you won't be able to encode the exact
 requirements, but you should come up with a useful stronger
@@ -45,51 +32,70 @@ you could encode that as "contains between 1 and 3 numbers."
 But you still shouldn't hard code a specific string like "123"
 to satisfy the rule.
 
+With the exception of rules 5 and 9,
+all of your rules should exactly encode the requirements
+given by the password game -- with no additional restrictions.
+For example, if the password is at least 5 characters long,
+you shouldn't say that it is exactly 10 characters long,
+and you shouldn't hard-code a specific string like "password"
+to satisfy the rule.
+We will be checking your implemention against a correct implementation
+of the rule during grading to see if it matches the right set of
+strings.
+
+Finally, Z3 may start to get slow once all the rules are added.
+Be patient -- it may take a few minutes to run.
+
 === Grading notes ===
 
-To ensure you get credit, please check that
+To ensure you get credit, please be sure that:
 - python3 password.py runs without errors
-- You do not rename or change the signature of the variable
-    p
-  or of any of the functions
-    rule_0, rule_1, ..., rule_10.
+- You do not rename or change the signature of any of the functions
+      rule_0, rule_1, ..., rule_10.
   During grading, these will be checked against a correct implementation
   to see if they match the right set of strings.
   (You don't have to have the exact same implementation as us, but it should be
   equivalent, aside from rules 5 and 9. See the additional requirements above).
 - pytest password_test.py runs with a single non-skipped test (for problem 11)
 - Your answers to problems 12-13 are filled in only in the designated space,
-  and the lines "Answer in the Space Below" and "End of Answer" are not modified.
+  and the marker lines "Answer Q" and "End of Answer" are not modified.
 
 === Getting help ===
 
 If you get stuck, take a look at:
 - regex_help.md
+- ascii_table.txt
 - hints.md
 - [Z3 python documentation](https://z3prover.github.io/api/html/namespacez3py.html)
 """
 
 import z3
 
-p = z3.String("password")
-
 ##########################
 ###  Helper functions  ###
 ##########################
+# These are provided for you -- you may find them useful.
 
 def ReFull():
+    """
+    Returns a Z3 regex that matches all strings.
+    """
     return z3.Full(z3.ReSort(z3.StringSort()))
 
 def ReContaining(r):
+    """
+    Returns a Z3 regex that matches any string containing a match for regex `r` somewhere in the middle.
+    For example,
+
+        ReContaining(z3.Range("a", "z"))
+
+    will match any string containing a lowercase letter.
+    """
     return z3.Concat(
         ReFull(),
         r,
         ReFull(),
     )
-
-def rule_0():
-    # Simplifying assumption: password is ASCII only
-    return z3.InRe(p, z3.Star(z3.Range(" ", "~")))
 
 #########################
 ###   Password Rules  ###
@@ -102,43 +108,47 @@ Similarly to rule 0, your rules will refer
 to the password variable `p` and return a Z3 constraint.
 """
 
-def rule_1():
+def rule_0(password):
+    # The password consists of only ASCII characters.
+    return z3.InRe(password, z3.Star(z3.Range(" ", "~")))
+
+def rule_1(password):
     # TODO
     raise NotImplementedError
 
-def rule_2():
+def rule_2(password):
     # TODO
     raise NotImplementedError
 
-def rule_3():
+def rule_3(password):
     # TODO
     raise NotImplementedError
 
-def rule_4():
+def rule_4(password):
     # TODO
     raise NotImplementedError
 
-def rule_5():
+def rule_5(password):
     # TODO
     raise NotImplementedError
 
-def rule_6():
+def rule_6(password):
     # TODO
     raise NotImplementedError
 
-def rule_7():
+def rule_7(password):
     # TODO
     raise NotImplementedError
 
-def rule_8():
+def rule_8(password):
     # TODO
     raise NotImplementedError
 
-def rule_9():
+def rule_9(password):
     # TODO
     raise NotImplementedError
 
-def rule_10():
+def rule_10(password):
     # TODO
     raise NotImplementedError
 
@@ -146,6 +156,8 @@ def rule_10():
 ###    Entrypoint    ###
 ########################
 """
+You don't need to modify this part.
+
 Combine all the rules and solve the game.
 To run, run `python password.py` in the terminal.
 
@@ -157,14 +169,18 @@ will skip after the first rule that is not implemented.
 def main():
     solver = z3.Solver()
 
+    password = z3.String("password")
+
     rules = [rule_0, rule_1, rule_2, rule_3, rule_4, rule_5, rule_6, rule_7, rule_8, rule_9, rule_10]
     try:
-        for i in range(11):
-            solver.add(rules[i]())
+        for (i, rule) in enumerate(rules):
+            solver.add(rule(password))
+            print(f"Rule {i}: added")
 
     except NotImplementedError:
-        print(f"Note: rule {i} was not implemented, additional rules skipped")
+        print(f"Rule {i}: not implemented (additional rules skipped)")
 
+    print("Solving...")
     print("")
     result = solver.check()
     if result == z3.sat:
@@ -210,7 +226,7 @@ Why do you think it was difficult?
 (Give your best guess -- there is no specific right answer.)
 
 # Do not remove this line:
-###### Answer in the Space Below ######
+###### Answer Q12 ######
 
 ###### End of Answer ######
 
@@ -219,7 +235,7 @@ Why do you think it was difficult?
 (Give your best guess -- there is no specific right answer.)
 
 # Do not remove this line:
-###### Answer in the Space Below ######
+###### Answer Q13 ######
 
 ###### End of Answer ######
 """

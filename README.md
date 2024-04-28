@@ -7,30 +7,30 @@
 ## Overview
 
 In this homework, we will use Z3 -- in particular,
-the Z3 API support for regular expressions --
+the Z3 string and regular expression data types --
 to implement a solver for the first 10 levels of the password game
 (link above).
 
 Before you start, try the password game yourself,
 to get a sense of how it works.
 
-As with HW2, you will need to have Z3 installed; see [Homework 0](https://github.com/DavisPL-Teaching/189c-hw0).
+As with HW2, you will need to have Z3 installed (see [Homework 0](https://github.com/DavisPL-Teaching/189c-hw0)).
 
 As with HW1 and HW2, you will submit your homework through GitHub Classroom.
-Clone your copy of the repository, then push your changes to GitHub before the deadline.
-Please see [this Piazza post](https://piazza.com/class/lt90i40zrot3ue/post/48) for further instructions.
+Clone your copy of the repository, then add, commit, and push your changes to GitHub before the deadline.
+For detailed instructions, see [this Piazza post](https://piazza.com/class/lt90i40zrot3ue/post/48).
 
 ## Task
 
-Your task is to fill in `password.py` with a Z3 program that solves the first 10 levels of the password game -- when run, your file will print out
-a password satisfying all the cosntraints for each of the first 10 levels.
+Your task is to fill in `password.py` with a Z3 program that solves the first 10 levels of the password game.
+When run, the program will print out a password satisfying all the cosntraints for each of the first 10 levels.
 The file contains further instructions.
 
 ## Getting help
 
 ### Regex help
 
-A successful solution will rely on the Z3 API support for regular expressions (Regex). We have include a file `regex_help.md` that provides some help with some of the available regular expression operators in Z3 that you may need to use.
+A successful solution will use the Z3 API for string and regular expression (Regex) types. We have include a file `regex_help.md` that provides some help with some of the available regular expression operators in Z3 that you may need to use.
 
 ### ASCII table
 
