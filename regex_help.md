@@ -4,16 +4,16 @@ The full Z3 Python API documentation can be found
 [here](https://z3prover.github.io/api/html/namespacez3py.html).
 Here are a few of the key regular expression operators that you will need:
 
+- `z3.InRe`: this creates an assertion that a string matches a regular expression.
+    For example, if `s` is a string and `s` is "cat", then
+    `z3.InRe(s, z3.Re("c.*t"))` is true.
+    This is how you get a (boolean) formula out of a regular expression.
+
 - `z3.Full`: matches any character.
     For technical reasons, it has to be passed a single argument, which is the "sort" (or type) of the characters that it matches. For this reason we provide a helper funcion ReFull which does this for you.
 
 - `z3.Re`: this turns a string into a regular expression.
     For example, `z3.Re("cat")` matches the string "cat".
-
-- `z3.InRe`: this creates an assertion that a string matches a regular expression.
-    For example, if `s` is a string and `s` is "cat", then
-    `z3.InRe(s, z3.Re("c.*t"))` is true.
-    This is how you get a (boolean) formula out of a regular expression.
 
 - `z3.Length`: this creates an integer variable for the length
     of a string `s`. For example, if `s` is "cat", then

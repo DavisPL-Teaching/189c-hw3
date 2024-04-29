@@ -9,31 +9,34 @@ password should satisfy. Each rule is a function
     rule_<number>(password)
 
 that takes a Z3 string variable `password` and returns
-a Z3 constraint that the password should satisfy.
+a Z3 formula that the password should satisfy.
 
 To run the code, open a terminal and execute
 
     python3 password.py
 
-At the bottom of the file, all of these rules
-are combined for you and passed into the solver.
-(You don't have to modify this part.)
+The code should print out a solution like this:
+
+    [password = "abc"]
+
+which you can copy and paste into the password game to
+see if it satisfies all the rules so far.
 
 === Additional requirements ===
 
 To simplify the problem, we will assume that the
 password is ASCII-only. The rule `rule_0` is written for you,
-and enforces this constraint.
+and it enforces this constraint.
 
-For rules 5 and 9, you won't be able to encode the exact
+For rules 5 and 9: you won't be able to encode the exact
 requirements, but you should come up with a useful stronger
-approximation. For example, if the rule is "contains a number",
-you could encode that as "contains between 1 and 3 numbers."
+requirement. For example, if the rule is "contains a number",
+you could encode that as "contains exactly 1, 2, or 3 numbers."
 But you still shouldn't hard code a specific string like "123"
 to satisfy the rule.
 
 With the exception of rules 5 and 9,
-all of your rules should exactly encode the requirements
+all of the other rules should exactly encode the requirements
 given by the password game -- with no additional restrictions.
 For example, if the password is at least 5 characters long,
 you shouldn't say that it is exactly 10 characters long,
@@ -43,8 +46,8 @@ We will be checking your implemention against a correct implementation
 of the rule during grading to see if it matches the right set of
 strings.
 
-Finally, Z3 may start to get slow once all the rules are added.
-Be patient -- it may take a few minutes to run.
+Finally, Z3 may start to slow down once all the rules are added!
+Be patient -- the code may take a couple of minutes to run.
 
 === Grading notes ===
 
@@ -105,10 +108,17 @@ Implement the rules for rounds 1 through 10 of the game.
 You will need to play the game to figure out what the rules are!
 
 Similarly to rule 0, your rules will refer
-to the password variable `p` and return a Z3 constraint.
+to the password variable `password` and return a Z3 formula.
+Rule 1 can be done without regular expressions.
+For the rest, you can use `z3.InRe(password, R)` to assert that the
+password matches a regular expression `R`.
 """
 
 def rule_0(password):
+    """
+    password: a `z3.String` variable representing the password
+    returns: a Z3 formula that the password should satisfy
+    """
     # The password consists of only ASCII characters.
     return z3.InRe(password, z3.Star(z3.Range(" ", "~")))
 
@@ -156,12 +166,10 @@ def rule_10(password):
 ###    Entrypoint    ###
 ########################
 """
-You don't need to modify this part.
+You shouldn't need to modify this part.
+It combines all the rules to solve the game.
+To run, run `python3 password.py` in the terminal.
 
-Combine all the rules and solve the game.
-To run, run `python password.py` in the terminal.
-
-This runs the main() function below.
 If you have any unimplemented rules, it
 will skip after the first rule that is not implemented.
 """
@@ -202,9 +210,12 @@ if __name__ == "__main__":
 ###    Discussion    ###
 ########################
 """
-Complete the last few questions after you have finished rules 1-10.
+Complete the last three questions after you have finished rules 1-10.
 
 11. Are there any of your rules that are redundant?
+By "redundant", we mean that the rule is implied by one of the
+other rules.
+
 If so, use Z3 to prove it: show that each redundant rule
 is implied by one of the others.
 

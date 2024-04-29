@@ -2,7 +2,7 @@
 
 ## ➜ [The password game](https://neal.fun/password-game/)
 
-## Due date: TBD
+## Due date: Friday, May 10
 
 ## Overview
 

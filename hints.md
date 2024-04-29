@@ -47,14 +47,14 @@ or limit the total number of characters in the password.
 ## Rule 10
 
 This one can throw Z3 off if you get unlucky and your Captcha
-contains characters which conflict with some of the other rules.
+contains characters which conflict with some of the other rules!
 If you run into this issue, try refreshing the Captcha to get an
 easier one.
 
 ## Question 11
 
 A rule is redundant if there is some other rule that implies it:
-    `z3.Implies(rule1, rule2)`
+    `z3.Implies(rule_a, rule_b)`
 
 The `prove` function from the helper module (from hw2) may be useful here,
 you can paste it in.
