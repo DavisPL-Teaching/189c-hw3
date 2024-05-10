@@ -54,9 +54,9 @@ Here are a few of the key regular expression operators that you will need:
     then `z3.IntToStr(d)` would be the string "42".
 
 - `z3.CharIsDigit`: a boolean expression that is true if
-    a character is a digit.
-    To use this: if you have a string `s`, and an integer `d`,
-    `s[d]` is a specific digit (for example), then
+    a character is a digit. To use this: if you have a string `s`,
+    and an integer index `i` (for example), then you could define
+    `is_digit = z3.And(z3.CharIsDigit(char_i), z3.Length(s) > i)`.
 
 - `z3.CharToInt`: this converts a character to its integer
     character code. If you use this, you will need to refer to
