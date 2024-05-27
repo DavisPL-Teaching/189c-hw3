@@ -28,14 +28,7 @@ To simplify the problem, we will assume that the
 password is ASCII-only. The rule `rule_0` is written for you,
 and it enforces this constraint.
 
-For rules 5 and 9: you won't be able to encode the exact
-requirements, but you should come up with a useful stronger
-requirement. For example, if the rule is "contains a number",
-you could encode that as "contains exactly 1, 2, or 3 numbers."
-But you still shouldn't hard code a specific string like "123"
-to satisfy the rule.
-
-With the exception of rules 5 and 9,
+With the exceptions listed below (in rules 5, 6, 8, and 9),
 all of the other rules should exactly encode the requirements
 given by the password game -- with no additional restrictions.
 For example, if the password is at least 5 characters long,
@@ -45,6 +38,26 @@ to satisfy the rule.
 We will be checking your implemention against a correct implementation
 of the rule during grading to see if it matches the right set of
 strings.
+
+For rules 5 and 9: you won't be able to encode the exact
+requirements, but you should come up with a useful stronger
+requirement. For example, if the rule is "contains a number",
+you could encode that as "contains exactly 1, 2, or 3 numbers."
+But you still shouldn't hard code a specific string like "123"
+to satisfy the rule.
+
+For rules 6 and 8: the password game online accepts both case-insensitive
+and case-sensitive versions of the rule. You may interpret this rule
+however you prefer, but you should be consistent with one of the following
+four conventions:
+1. All lowercase: Just assume the part of the password that is being checked
+   is all lowercase
+2. All uppercase: Just assume the part of the password that is being checked
+    is all uppercase
+3. Case-insensitive: Assume the part of the password that is being checked
+    can be any mix of uppercase and lowercase
+4. First letter uppercase: Assume the first letter of the part of the password
+    being checked is uppercase, and the rest is lowercase.
 
 Finally, Z3 may start to slow down once all the rules are added!
 Be patient -- the code may take a couple of minutes to run.
@@ -60,8 +73,11 @@ To ensure you get credit, please be sure that:
   (You don't have to have the exact same implementation as us, but it should be
   equivalent, aside from rules 5 and 9. See the additional requirements above).
 - pytest password_test.py runs with a single non-skipped test (for problem 11)
+- problem 11 has one assertion for every redundant rule (make sure it is exhaustive)
 - Your answers to problems 12-13 are filled in only in the designated space,
-  and the marker lines "Answer Q" and "End of Answer" are not modified.
+  between the marker lines "Answer Q" and "End of Answer"
+- Running time is at most 10 minutes for python3 password.py
+- Running time is at most 5 minutes for pytest password_test.py
 
 === Getting help ===
 
@@ -212,16 +228,23 @@ if __name__ == "__main__":
 """
 Complete the last three questions after you have finished rules 1-10.
 
-11. Are there any of your rules that are redundant?
+11. How many of your rules are redundant?
 By "redundant", we mean that the rule is implied by one of the
 other rules.
 
-If so, use Z3 to prove it: show that each redundant rule
+For each rule that is redundant, use Z3 to prove it:
+show that the redundant rule
 is implied by one of the others.
+Many of these implications are intractable. So, it is enough to show it
+for a certain bound on the password length, e.g., 20 characters.
+If that's still intractable, you can comment out the case and add
+a comment that it's true, but Z3 is not able to prove it.
 
 Fill in the test below; it should have one assertion
 for each redundant rule.
 Remember to unskip the test to get credit!
+
+Time bound: the test should run in under 5 minutes.
 """
 
 import pytest
@@ -237,7 +260,7 @@ Why do you think it was difficult?
 (Give your best guess -- there is no specific right answer.)
 
 # Do not remove this line:
-###### Answer Q12 ######
+###### Answer Q12 Below ######
 
 ###### End of Answer ######
 
@@ -246,7 +269,7 @@ Why do you think it was difficult?
 (Give your best guess -- there is no specific right answer.)
 
 # Do not remove this line:
-###### Answer Q13 ######
+###### Answer Q13 Below ######
 
 ###### End of Answer ######
 """
