@@ -43,7 +43,8 @@ For rules 5 and 9: you may not be able to encode the exact
 requirements, but you should come up with a useful stronger
 requirement. For example, if the rule is "contains a number",
 you could encode that as "contains exactly 1, 2, or 3 numbers."
-But you still shouldn't hard code a specific string like "123"
+But you should not hard code a specific string like "123"
+or a specific set of digits like 5, 5, 5, 5, and 5
 to satisfy the rule.
 
 For rules 6 and 8: the password game online accepts both case-insensitive
@@ -229,9 +230,12 @@ Complete the last three questions after you have finished rules 1-10.
 By "redundant", we mean that the rule is implied by one of the
 other rules.
 
-For each rule that is redundant, use Z3 to prove it:
+Please exclude Rule 0 and Rule 10 for the purposes of this question.
+For each rule 1-9 that is redundant, use Z3 to prove it:
 show that the redundant rule
-is implied by one of the others.
+is implied by one or more of the others (other than Rule 10).
+For example: if you think Rule 3 is implied by Rules 1 and 2, you would prove that.
+
 Many of these implications are intractable. So, it is enough to show it
 for a certain bound on the password length, e.g., 20 characters.
 If that's still intractable, you can comment out the case and add
@@ -245,6 +249,7 @@ Time bound: the test should run in under 5 minutes.
 """
 
 import pytest
+import helper
 
 @pytest.mark.skip
 def test_redundant_rules():
