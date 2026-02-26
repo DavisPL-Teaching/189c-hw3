@@ -230,11 +230,17 @@ Complete the last three questions after you have finished rules 1-10.
 By "redundant", we mean that the rule is implied by one of the
 other rules.
 
-Please exclude Rule 0 and Rule 10 for the purposes of this question.
-For each rule 1-9 that is redundant, use Z3 to prove it:
-show that the redundant rule
-is implied by one or more of the others (other than Rule 10).
-For example: if you think Rule 3 is implied by Rules 1 and 2, you would prove that.
+Please exclude Rule 0 for the purposes of this question.
+For each rule 1-10 that is redundant with another rule, use Z3 to prove it:
+show that it is implied by one of the others.
+If there are more than one rule that implies it, please include one assertion *for each* implication.
+For example: if you think Rule 3 is implied by Rule 1, and also implied by Rule 5, you should have two assertions:
+
+    // 3 is redundant
+    // 1 ==> 3
+    assert ...
+    // 5 ==> 3
+    assert ...
 
 Many of these implications are intractable. So, it is enough to show it
 for a certain bound on the password length, e.g., 20 characters.
@@ -242,7 +248,7 @@ If that's still intractable, you can comment out the case and add
 a comment that it's true, but Z3 is not able to prove it.
 
 Fill in the test below; it should have one assertion
-for each redundant rule.
+for each pair of rules (i, j) with i implies j.
 Remember to unskip the test to get credit!
 
 Time bound: the test should run in under 5 minutes.

@@ -60,3 +60,14 @@ The `prove` function from the helper module (from hw2) may be useful here,
 you can paste it in.
 
     `assert prove(...) == PROVED`
+
+Remember to add one assertion for each pair, if a rule can be implied by multiple other rules.
+For example:
+
+    // 1 ==> 3
+    assert ...
+    // 5 ==> 3
+    assert ...
+
+You may want to compare your solution with other students to see if you got the same number of redundant
+rules -- as well as the same number of assertions i ==> j for each of those rules!
