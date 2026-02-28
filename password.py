@@ -70,7 +70,7 @@ To ensure you get credit, please be sure that:
   to see if they match the right set of strings.
   (You don't have to have the exact same implementation as us, but it should be
   equivalent, aside from rules 5 and 9. See the additional requirements above).
-- pytest password_test.py runs with a single non-skipped test (for problem 11)
+- pytest password.py runs with a single non-skipped test (for problem 11)
 - problem 11 has one assertion for every redundant rule (make sure it is exhaustive)
 - Your answers to problems 12-13 are filled in only in the designated space,
   between the marker lines "Answer Q" and "End of Answer"
