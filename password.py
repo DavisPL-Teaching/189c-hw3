@@ -123,9 +123,14 @@ You will need to play the game to figure out what the rules are!
 
 Similarly to rule 0, your rules will refer
 to the password variable `password` and return a Z3 formula.
+
 Rule 1 can be done without regular expressions.
-For the rest, you can use `z3.InRe(password, R)` to assert that the
+For the rest, you should use `z3.InRe(password, R)` to assert that the
 password matches a regular expression `R`.
+
+Try to use regular expressions as much as possible! It will lead to more
+efficient solutions for most rules than doing things separately.
+For example: if your password should match one of two things, use `z3.Union` instead of `z3.Or`.
 """
 
 def rule_0(password):
